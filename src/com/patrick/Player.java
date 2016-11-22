@@ -71,13 +71,25 @@ public abstract class Player {
     }
 
     public Card humanSelectCardToPlay() {
-        handOfCards.displayHand();
-        String prompt = "Pleaes select a card to play.";
-        int userChoice = Game.ui.numInput(prompt);
-        Card selectedCard = handOfCards.playCard(userChoice);
-        //Returns a card to PlayerManager.TODO Add this card to the pile of played cards.
-        return selectedCard;
+        while(true) {
+            handOfCards.displayHand();
+            String prompt = "Please select a card to play.";
+            int userChoice = Game.ui.numInput(prompt);
+            if (userChoice <= handOfCards.size()) {
+                Card selectedCard = handOfCards.playCard(userChoice);
+                //Returns a card to PlayerManager.TODO Add this card to the pile of played cards.
+                return selectedCard;
+            }else{
+                System.out.println("Please select valid card");
+            }
+        }
 
+    }
+    public Card computerSelectCardToPlay(){
+        handOfCards.displayHand();
+        int ComputerChoice = 1;
+        Card selectedCard = handOfCards.playCard(ComputerChoice);
+        return selectedCard;
     }
 
     @Override

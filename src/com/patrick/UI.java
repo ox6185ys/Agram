@@ -8,6 +8,7 @@ package com.patrick;
     in the spade suit is the 10.
 */
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class UI {
     static Scanner stringScanner = new Scanner(System.in);
@@ -31,9 +32,16 @@ public class UI {
     public int numInput(){
         return numberScanner.nextInt();
     }
-    public int numInput(String prompt){
-        numOutput(prompt);
-        return numberScanner.nextInt();
+    public int numInput(String prompt) {
+        while (true) {
+            numOutput(prompt);
+            try {
+                return numberScanner.nextInt();
+            }catch(InputMismatchException ime){
+                System.out.println("Enter a valid integer");
+                numberScanner.next();
+            }
+        }
     }
 
     public static void close() {
